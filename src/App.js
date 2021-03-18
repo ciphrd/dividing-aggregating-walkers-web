@@ -1,8 +1,11 @@
 import './App.css'
+import SimContainer from './Components/SimContainer'
 
 function App() {
   return (
-    <div>coucou</div>
+    <div>
+      <SimContainer />
+    </div>
   );
 }
 

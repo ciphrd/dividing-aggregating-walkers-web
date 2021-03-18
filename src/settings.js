@@ -1,0 +1,25 @@
+export default {
+  envSize: 1024,
+  nbInitialWalkers: 10,
+
+  // walking step
+  stepSize: 1.0,
+  turnChances: 0.03,
+  turnAngle: 0.4,
+  discreteTurnAngle: true,
+
+  // deposit step
+  depositRate: 0.1,
+
+  // division step
+  divisionChances: 0.1,
+  divisionAngle: Math.PI / 4,
+  discreteDivAngle: false,
+
+  // termination step
+  terminationThreshold: 0.8,
+  terminationChances: 0.8,    // * division chances
+
+  // fast hack to have the reset fn global 
+  resetFn: null,
+}
