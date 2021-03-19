@@ -7,6 +7,10 @@ const StControl = styled.div`
   flex-direction: row;
   gap: 20px;
   align-items: center;
+
+  .label {
+    width: 200px;
+  }
 `
 
 function Control({ label, children }) {

@@ -24,13 +24,22 @@ const SimContainer = forwardRef((props, ref) => {
   const isMouseDown = useRef()
   const mouse = useRef()
 
+  const resize = () => {
+    const cvs = canvasRef.current
+    cvs.width = cvs.height = settings.envSize  
+    simulation.current.init()
+  }
+
   useEffect(() => {
     const cvs = canvasRef.current
     cvs.width = cvs.height = settings.envSize
     simulation.current = new Simulation(cvs)
     simulation.current.init()
-    settings.resetFn = simulation.current.init
     ref.current = simulation.current
+
+    settings.killWalkersFn = simulation.current.killAllWalkers
+    settings.resetFn = simulation.current.init
+    settings.resizeFn = resize
   }, [])
 
   useAnimationFrame((dt) => {

@@ -64,20 +64,21 @@ const StSlider = styled.input.attrs(props => ({
   }
 `
 
-function NumberController ({ min, max, step, value, onChange, showValue }) {
+function NumberController ({ min, max, step, value, onChange, onChangeEnd, showValue, showValueFn }) {
   return (
     <>
-      <StSliderContainer value={value}>
+      <StSliderContainer value={(value-min)/(max-min)}>
         <StSlider
           min={min}
           max={max}
           step={step}
           value={value}
           onChange={event => onChange(parseFloat(event.target.value))}
+          onMouseUp={() => onChangeEnd && onChangeEnd()}
         />
       </StSliderContainer>
 
-      {showValue && value.toFixed(3)}
+      {showValue && (showValueFn ? showValueFn(value) : value.toFixed(3))}
     </>
   )
 }

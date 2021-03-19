@@ -16,7 +16,7 @@ class Simulation {
     this.aggMap = new AggregationMap()
   }
 
-  init () {
+  init = () => {
     this.walkers = []
     for (let i = 0; i < settings.nbInitialWalkers; i++) {
       // distribute the walkers in circle
@@ -31,13 +31,17 @@ class Simulation {
     this.ctx.fillStyle = 'black'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     this.aggMap.generate()
-    this.aggMap.draw()
+    //this.aggMap.draw()
   }
 
   addWalker (x, y, ang) {
     this.walkers.push(
       new Walker(x, y, ang)
     )
+  }
+
+  killAllWalkers = () => {
+    this.walkers = []
   }
 
   deposit (walker) {

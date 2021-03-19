@@ -22,4 +22,6 @@ export default {
 
   // fast hack to have the reset fn global 
   resetFn: null,
+  resizeFn: null,
+  killWalkersFn: null,
 }
