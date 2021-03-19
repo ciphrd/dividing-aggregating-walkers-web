@@ -1,5 +1,5 @@
 export default {
-  envSize: 1024,
+  envSize: 512,
   nbInitialWalkers: 10,
 
   // walking step

@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Colors } from "../../Theme"
 
 
 const SLIDER_HEIGHT = 5
@@ -17,7 +18,7 @@ const StSliderContainer = styled.div`
     left: 0;
     height: 100%;
     width: ${props => props.value*100}%;
-    background: rgba(255, 0, 0, 0.8);
+    background: ${Colors.primary};
     pointer-events: none;
   }
 
@@ -31,6 +32,7 @@ const StSliderContainer = styled.div`
     width: 4px;
     background: white;
     box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.4);
+    pointer-events: none;
   }
 
   input {
@@ -62,17 +64,21 @@ const StSlider = styled.input.attrs(props => ({
   }
 `
 
-function NumberController ({ min, max, step, value, onChange }) {
+function NumberController ({ min, max, step, value, onChange, showValue }) {
   return (
-    <StSliderContainer value={value}>
-      <StSlider
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={event => onChange(parseFloat(event.target.value))}
-      />
-    </StSliderContainer>
+    <>
+      <StSliderContainer value={value}>
+        <StSlider
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={event => onChange(parseFloat(event.target.value))}
+        />
+      </StSliderContainer>
+
+      {showValue && value.toFixed(3)}
+    </>
   )
 }
 

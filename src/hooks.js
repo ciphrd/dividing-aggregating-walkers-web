@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 
 export const useAnimationFrame = (callback) => {
   const timer = useRef(0)
@@ -29,3 +29,11 @@ export const useDomEvent = (elem, eventName, callback) => {
     }
   })
 } 
+
+export const useReRender = () => {
+  const [renderId, setRenderId] = useState()
+  const reRender = () => {
+    setRenderId(Math.random())
+  }
+  return reRender
+}
