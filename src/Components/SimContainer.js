@@ -1,10 +1,24 @@
-import { useEffect, useRef } from "react"
+import { forwardRef, useEffect, useRef } from "react"
+import styled from "styled-components"
 import { useAnimationFrame } from "../hooks"
 import settings from "../settings"
 import Simulation from "../Simulation"
 
 
-function SimContainer () {
+const StContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  canvas {
+    max-width: 100%;
+    max-height: 100%;
+  }
+`
+
+const SimContainer = forwardRef((props, ref) => {
   const canvasRef = useRef()
   const simulation = useRef()
 
@@ -14,6 +28,7 @@ function SimContainer () {
     simulation.current = new Simulation(cvs)
     simulation.current.init()
     settings.resetFn = simulation.current.init
+    ref.current = simulation.current
   }, [])
 
   useAnimationFrame((dt) => {
@@ -22,10 +37,12 @@ function SimContainer () {
   })
 
   return (
-    <canvas 
-      ref={canvasRef}
-    />
+    <StContainer>
+      <canvas 
+        ref={canvasRef}
+      />
+    </StContainer>
   )
-}
+})
 
 export default SimContainer
