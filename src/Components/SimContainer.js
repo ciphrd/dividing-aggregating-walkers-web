@@ -21,6 +21,8 @@ const StContainer = styled.div`
 const SimContainer = forwardRef((props, ref) => {
   const canvasRef = useRef()
   const simulation = useRef()
+  const isMouseDown = useRef()
+  const mouse = useRef()
 
   useEffect(() => {
     const cvs = canvasRef.current
@@ -32,14 +34,30 @@ const SimContainer = forwardRef((props, ref) => {
   }, [])
 
   useAnimationFrame((dt) => {
-    console.log(dt)
+    if (isMouseDown.current) {
+      simulation.current.addWalker(mouse.current.x*settings.envSize, mouse.current.y*settings.envSize, Math.random()*Math.PI*2)
+    }
+
     simulation.current.update(dt < 30)
   })
+
+  const onMouseMove = event => {
+    const cvs = canvasRef.current
+    const bounds = canvasRef.current.getBoundingClientRect()
+    const dx = (event.clientX - bounds.x) / bounds.width
+    const x = (event.clientX - bounds.x) / bounds.width
+    const y = (event.clientY - bounds.y) / bounds.height
+    mouse.current = { x, y }
+  }
 
   return (
     <StContainer>
       <canvas 
         ref={canvasRef}
+        onMouseDown={() => isMouseDown.current = true}
+        onMouseMove={onMouseMove}
+        onMouseUp={() => isMouseDown.current = false}
+        onMouseLeave={() => isMouseDown.current = false}
       />
     </StContainer>
   )

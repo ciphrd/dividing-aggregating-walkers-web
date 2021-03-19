@@ -34,6 +34,12 @@ class Simulation {
     this.aggMap.draw()
   }
 
+  addWalker (x, y, ang) {
+    this.walkers.push(
+      new Walker(x, y, ang)
+    )
+  }
+
   deposit (walker) {
     this.ctx.strokeStyle = `rgba(255, 255, 255, ${settings.depositRate})`
     this.ctx.lineWidth = 1
