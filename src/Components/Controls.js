@@ -10,6 +10,13 @@ import BooleanController from "./Controller/BooleanController"
 
 
 const StCont = styled.div`
+  max-width: 500px;
+  padding-right: 20px;
+  
+  @media (max-width: 1024px) {
+    max-width: none;
+    padding: 0 10px;
+  }
 `
 
 const StSection = styled.section`
@@ -18,7 +25,8 @@ const StSection = styled.section`
     font-size: 1rem;
     margin: 0;
     background: ${Colors.primaryA(0.2)};
-    padding: 3px 10px;
+    padding: 4px 10px 3px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .section-content {
@@ -27,6 +35,12 @@ const StSection = styled.section`
     display: flex;
     flex-direction: column;
     gap: 7px;
+  }
+
+  &:not(:last-child) {
+    .section-content {
+      border-bottom: none;
+    }
   }
 `
 

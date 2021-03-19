@@ -10,14 +10,37 @@ const StCont = styled.main`
   display: flex;
   flex-direction: row;
   gap: 20px;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    max-width: 100%;
+  }
 `
 const StSim = styled.section`
   height: 100vh;
   width: 100vh;
+
+  @media (max-width: 1024px) {
+    width: 100vw;
+    height: 100vw;
+    max-width: 100%;
+  }
 `
 
 const StRight = styled.section`
   flex-grow: 2;
+
+  h1 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 1024px) {
+    h1 {
+      margin-top: 0;
+      margin-left: 20px;
+    }
+  }
 `
 
 function App() {
