@@ -1,3 +1,4 @@
+import AggregationMap from "./AggregationMap"
 import settings from "./settings"
 import { getTorusPos, prob } from "./utils"
 import Walker from "./Walker"
@@ -7,17 +8,19 @@ class Simulation {
   /** @type {CanvasRenderingContext2D} */
   ctx
   walkers
+  aggMap
 
   constructor (canvas) {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
+    this.aggMap = new AggregationMap()
   }
 
   init () {
     this.walkers = []
     for (let i = 0; i < settings.nbInitialWalkers; i++) {
       // distribute the walkers in circle
-      let da = i / settings.nbInitialWalkers
+      let da = i / settings.nbInitialWalkers * Math.PI * 2
       let x = Math.cos(da) * settings.envSize * .5 + settings.envSize * .5
       let y = Math.sin(da) * settings.envSize * .5 + settings.envSize * .5
       let a = Math.random() * Math.PI * 2
@@ -27,6 +30,8 @@ class Simulation {
     }
     this.ctx.fillStyle = 'black'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    this.aggMap.generate()
+    this.aggMap.draw()
   }
 
   deposit (walker) {
@@ -91,7 +96,7 @@ class Simulation {
       // samples the r color of the aggregate
       const idx = ((fpos.x + fpos.y * settings.envSize)|0) * 4
       const aggreg = env.data[idx]
-      if (aggreg > settings.terminationThreshold*255) {
+      if (aggreg > settings.terminationThreshold*255 * this.aggMap.getValueAtIndex(idx/4)) {
         this.walkers.splice(i, 1)
         // draw its last step to fill the gap
         w.lastPos = w.pos

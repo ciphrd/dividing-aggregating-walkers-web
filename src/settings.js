@@ -9,7 +9,7 @@ export default {
   discreteTurnAngle: true,
 
   // deposit step
-  depositRate: 0.1,
+  depositRate: .1,
 
   // division step
   divisionChances: 0.1,
@@ -17,7 +17,7 @@ export default {
   discreteDivAngle: false,
 
   // termination step
-  terminationThreshold: 0.8,
+  terminationThreshold: 0.9,
   terminationChances: 0.8,    // * division chances
 
   // fast hack to have the reset fn global 
