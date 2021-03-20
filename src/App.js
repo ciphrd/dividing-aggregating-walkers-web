@@ -33,16 +33,23 @@ const StRight = styled.section`
   align-items: center;
 
   h1 {
-    margin-top: 30px;
     margin-bottom: 30px;
+    margin-top: 15px;
   }
 
   .right-content {
     width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
   }
 
   @media (max-width: 1024px) {
     padding-bottom: 10px;
+    max-height: none;
+
+    .right-content {
+      overflow-y: visible;
+    }
 
     h1 {
       margin-top: 0;

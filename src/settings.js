@@ -31,4 +31,5 @@ export default {
   resetFn: null,
   resizeFn: null,
   killWalkersFn: null,
+  saveTextureFn: null,
 }

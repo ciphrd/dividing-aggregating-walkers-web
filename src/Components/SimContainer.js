@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { useAnimationFrame } from "../hooks"
 import settings from "../settings"
 import Simulation from "../Simulation"
+import { downloadURI } from '../utils'
 
 
 const StContainer = styled.div`
@@ -37,9 +38,19 @@ const SimContainer = forwardRef((props, ref) => {
     simulation.current.init()
     ref.current = simulation.current
 
+    const takeSnapshot = () => {
+      // get index from storage
+      let idx = localStorage.getItem('frame-idx')
+      idx = idx === null ? 0 : parseInt(idx)+1
+      const dataUrl = cvs.toDataURL("image/png")
+      downloadURI(dataUrl, `dividing-aggregating-walkers_${idx}.png`)
+      localStorage.setItem('frame-idx', idx)
+    }
+
     settings.killWalkersFn = simulation.current.killAllWalkers
     settings.resetFn = simulation.current.init
     settings.resizeFn = resize
+    settings.saveTextureFn = takeSnapshot
   }, [])
 
   useAnimationFrame((dt) => {

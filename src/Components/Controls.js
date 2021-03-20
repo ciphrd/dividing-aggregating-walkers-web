@@ -22,6 +22,13 @@ const StCont = styled.div`
 `
 
 const StSection = styled.section`
+  &.buttons {
+    display: grid;
+    grid-template: "1fr 1fr";
+    grid-gap: 15px;
+    margin-bottom: 20px;
+  }
+
   h6 {
     align-items: center;
     font-size: 1rem;
@@ -58,7 +65,7 @@ function Controls ({ simulation }) {
 
   return (
     <StCont>
-      <StSection>
+      <StSection className="buttons">
         <Button onClick={() => settings.resetFn()}>
           <i className="fas fa-redo" />
           <span>Restart simulation</span>
@@ -66,6 +73,10 @@ function Controls ({ simulation }) {
         <Button onClick={() => settings.killWalkersFn()}>
           <i className="fas fa-skull" />
           <span>Kill current walkers</span>
+        </Button>
+        <Button onClick={() => settings.saveTextureFn()}>
+          <i className="fas fa-camera"/>
+          <span>Save texture</span>
         </Button>
       </StSection>
 

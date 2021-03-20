@@ -5,5 +5,5 @@
 * ~~controls~~
 * ~~perlin noise termination map update module~~
 * presets
-* save frame (index saved in local storage)
+* ~~save frame (index saved in local storage)~~
 * initial seed settings

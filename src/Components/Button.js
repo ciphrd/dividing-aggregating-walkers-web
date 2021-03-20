@@ -9,11 +9,12 @@ const StButton = styled.button`
   font-family: inherit;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: row;
   gap: 10px;
   padding: 5px 8px;
-  margin-bottom: 10px;
   transition: all .3s ease-out;
+  font-weight: bold;
 
   &:hover {
     transform: scale(1.03);
