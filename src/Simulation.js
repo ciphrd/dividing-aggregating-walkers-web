@@ -1,4 +1,4 @@
-import AggregationMap from "./AggregationMap"
+import TerminationMap from "./TerminationMap"
 import settings from "./settings"
 import { getTorusPos, prob } from "./utils"
 import Walker from "./Walker"
@@ -28,7 +28,7 @@ class Simulation {
     }
     this.ctx.fillStyle = 'black'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-    AggregationMap.generate()
+    TerminationMap.generate()
   }
 
   addWalker (x, y, ang) {
@@ -103,7 +103,7 @@ class Simulation {
       // samples the r color of the aggregate
       const idx = ((fpos.x + fpos.y * settings.envSize)|0) * 4
       const aggreg = env.data[idx]
-      if (aggreg > settings.terminationThreshold*255 * AggregationMap.getValueAtIndex(idx/4)) {
+      if (aggreg > settings.terminationThreshold*255 * TerminationMap.getValueAtIndex(idx/4)) {
         this.walkers.splice(i, 1)
         // draw its last step to fill the gap
         w.lastPos = w.pos

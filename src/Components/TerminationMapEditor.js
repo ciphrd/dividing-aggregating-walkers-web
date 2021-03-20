@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import TerminationMap from "../AggregationMap"
+import TerminationMap from "../TerminationMap"
 import settings from "../settings"
 import { Colors } from "../Theme"
 import Control from "./Controller/Control"

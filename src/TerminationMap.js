@@ -6,7 +6,7 @@ import settings from './settings'
  * At the termination step, the Aggregration Threshold is multiplied by the value on the aggregation map at the coordinates
  * of the agent, resulting in a different Aggregation Threshold on each area.
  */
-class AggregationMap {
+class TerminationMap {
   /** @type {Float32Array} */
   map
   onGenerateCallbacks = []
@@ -81,6 +81,6 @@ class AggregationMap {
   } 
 }
 
-const terminationMap = new AggregationMap()
+const terminationMap = new TerminationMap()
 
 export default terminationMap

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import TerminationMap from "../AggregationMap"
+import TerminationMap from "../TerminationMap"
 
 
 function TerminationMapRenderer({ size }) {
