@@ -10,6 +10,11 @@ const StSliderContainer = styled.div`
   position: relative;
   height: ${SLIDER_HEIGHT}px;
 
+  @media (max-width: 1024px) {
+    flex-grow: 2;
+    width: auto;
+  }
+
   &::before {
     content: '';
     display: block;

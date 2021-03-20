@@ -19,6 +19,13 @@ export default {
   // termination step
   terminationThreshold: 0.9,
   terminationChances: 0.8,    // * division chances
+  terminationMap: {
+    scale: 3,
+    offset: .7,
+    exponent: 1.5,
+    amplitude: .3,
+    zpos: 0,
+  },
 
   // fast hack to have the reset fn global 
   resetFn: null,

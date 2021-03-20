@@ -29,13 +29,21 @@ const StSim = styled.section`
 
 const StRight = styled.section`
   flex-grow: 2;
+  display: flex;
+  align-items: center;
 
   h1 {
     margin-top: 30px;
     margin-bottom: 30px;
   }
 
+  .right-content {
+    width: 100%;
+  }
+
   @media (max-width: 1024px) {
+    padding-bottom: 10px;
+
     h1 {
       margin-top: 0;
       margin-left: 20px;
@@ -53,8 +61,10 @@ function App() {
       </StSim>
 
       <StRight>
-        <h1>Dividing-Aggregating Walkers</h1>
-        <Controls />
+        <div className="right-content">
+          <h1>Dividing-Aggregating Walkers</h1>
+          <Controls />
+        </div>
       </StRight>
     </StCont>
   );

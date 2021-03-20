@@ -7,6 +7,7 @@ import Button from "./Button"
 import Control from "./Controller/Control"
 import NumberController from "./Controller/NumberController"
 import BooleanController from "./Controller/BooleanController"
+import TerminationMapController from "./Controller/TerminationMapController"
 
 
 const StCont = styled.div`
@@ -16,6 +17,7 @@ const StCont = styled.div`
   @media (max-width: 1024px) {
     max-width: none;
     padding: 0 10px;
+    width: 100%;
   }
 `
 
@@ -210,6 +212,11 @@ function Controls ({ simulation }) {
               value={settings.terminationChances}
               onChange={value => updateSetting('terminationChances', value)}
               showValue={true}
+            />
+          </Control>
+          <Control label="Termination map">
+            <TerminationMapController 
+              onChange={value => updateSetting('terminationMap', value)}
             />
           </Control>
         </div>

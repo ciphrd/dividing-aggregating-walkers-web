@@ -10,6 +10,10 @@ const StControl = styled.div`
 
   .label {
     width: 200px;
+
+    @media (max-width: 1024px) {
+      width: 30%;
+    }
   }
 `
 

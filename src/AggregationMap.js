@@ -9,36 +9,54 @@ import settings from './settings'
 class AggregationMap {
   /** @type {Float32Array} */
   map
+  onGenerateCallbacks = []
+  renderCanvas = null
 
-  constructor () {}
+  constructor () {
+    this.renderCanvas = document.createElement('canvas')
+  }
 
   generate () {
     const size = settings.envSize
 
     // todo: these should be moved out for user selection
-    const scale = 3 / size
-    const offset = .7
-    const exponent = 1.5
-    const amplitude = .3
-    const zpos = 0
+    const scale = settings.terminationMap.scale / size
+    const offset = settings.terminationMap.offset
+    const exponent = settings.terminationMap.exponent
+    const amplitude = settings.terminationMap.amplitude
+    const zpos = settings.terminationMap.zpos
 
     this.map = new Float32Array(size*size)
 
-    const noise2D = makeNoise3D(Date.now())
+    const noise2D = makeNoise3D(0)
     for (let x = 0; x < size; x++) {
       for (let y = 0; y < size; y++) {
         const i = (x + y * size)
         const value = Math.pow(noise2D(x*scale, y*scale, zpos) * amplitude + offset, exponent) // [0; 1] 
-        this.map[i] = value
+        this.map[i] = Math.min(1, Math.max(0, value))
       }
+    }
+
+    for (const onGenerate of this.onGenerateCallbacks) {
+      onGenerate()
     }
   }
 
-  draw () {
+  registerOnGenerate = func => {
+    this.onGenerateCallbacks.push(func)
+  }
+
+  unregisterOnGenerate = func => {
+    const index = this.onGenerateCallbacks.indexOf(func)
+    if (index > -1) {
+      this.onGenerateCallbacks.splice(index, 1)
+    }
+  }
+
+  draw (targetCanvas) {
     const size = settings.envSize
-    const canvas = document.createElement('canvas')
-    canvas.width = canvas.height = size
-    const ctx = canvas.getContext("2d")
+    this.renderCanvas.width = this.renderCanvas.height = size
+    const ctx = this.renderCanvas.getContext("2d")
     const imageData = ctx.createImageData(size, size);
 
     for (let x = 0; x < size; x++) {
@@ -54,7 +72,8 @@ class AggregationMap {
     }
     ctx.putImageData(imageData, 0, 0)
 
-    document.body.append(canvas)
+    const targetCtx = targetCanvas.getContext('2d')
+    targetCtx.drawImage(this.renderCanvas, 0, 0, targetCanvas.width, targetCanvas.height)
   }
 
   getValueAtIndex (idx) {
@@ -62,4 +81,6 @@ class AggregationMap {
   } 
 }
 
-export default AggregationMap
+const terminationMap = new AggregationMap()
+
+export default terminationMap

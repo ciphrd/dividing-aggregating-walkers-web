@@ -8,12 +8,10 @@ class Simulation {
   /** @type {CanvasRenderingContext2D} */
   ctx
   walkers
-  aggMap
 
   constructor (canvas) {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
-    this.aggMap = new AggregationMap()
   }
 
   init = () => {
@@ -30,8 +28,7 @@ class Simulation {
     }
     this.ctx.fillStyle = 'black'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-    this.aggMap.generate()
-    //this.aggMap.draw()
+    AggregationMap.generate()
   }
 
   addWalker (x, y, ang) {
@@ -106,7 +103,7 @@ class Simulation {
       // samples the r color of the aggregate
       const idx = ((fpos.x + fpos.y * settings.envSize)|0) * 4
       const aggreg = env.data[idx]
-      if (aggreg > settings.terminationThreshold*255 * this.aggMap.getValueAtIndex(idx/4)) {
+      if (aggreg > settings.terminationThreshold*255 * AggregationMap.getValueAtIndex(idx/4)) {
         this.walkers.splice(i, 1)
         // draw its last step to fill the gap
         w.lastPos = w.pos
